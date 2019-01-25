@@ -25,6 +25,20 @@ const routes: Routes = [
           }
         ]
       },
+      {
+        path: 'details/:id', // edit the path name
+        children: [
+          {
+            path: '',
+            loadChildren: '../park-details/park-details.module#ParkDetailsPageModule' // edit the module
+          }
+        ]
+      },
+      {
+        path: 'details',
+        redirectTo: '/tabs/parks',
+        pathMatch: 'full'
+      },
       // {
       //   path: 'tab3',
       //   children: [

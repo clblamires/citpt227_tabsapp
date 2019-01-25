@@ -1,3 +1,4 @@
+import { ParkData } from './providers/park-data';
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -6,15 +7,19 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  providers: [ ParkData ]
 })
 export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public parkData: ParkData
   ) {
     this.initializeApp();
+    console.log(parkData.load());
+
   }
 
   initializeApp() {
