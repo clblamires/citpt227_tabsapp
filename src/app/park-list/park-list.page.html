@@ -20,7 +20,7 @@
     </ion-item-divider>
     <ion-item (click)="goParkDetails(park)" class="parklist" *virtualItem="let park">
       <ion-thumbnail slot="start">
-        <img src="assets/img/thumbs/{{ park.image }}" />
+        <ion-img src="assets/img/thumbs/{{ park.image }}"></ion-img>
       </ion-thumbnail>
       <ion-label>
         <span>{{ park.name }}</span>

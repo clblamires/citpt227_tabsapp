@@ -25,7 +25,6 @@ export class ParkListPage implements OnInit {
   goParkDetails( theParkData ){
     let url = '/tabs/details/' + theParkData.id
     this.router.navigate([url]);
-    
   }
 
   getParks( event ){
