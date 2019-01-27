@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 
 // the park data
 import { ParkData } from './../providers/park-data';
+import { Park } from './../interfaces/park';
+
 
 @Component({
   selector: 'app-park-list',
@@ -11,7 +13,8 @@ import { ParkData } from './../providers/park-data';
 })
 export class ParkListPage implements OnInit {
 
-  parks: Array<Object> = [];
+  parks: Array<Park> = [];
+  searchQuery: string = '';
 
   constructor( public parkData: ParkData, public router: Router ) { 
     parkData.getParks().then( data => {
@@ -23,6 +26,29 @@ export class ParkListPage implements OnInit {
     let url = '/tabs/details/' + theParkData.id
     this.router.navigate([url]);
     
+  }
+
+  getParks( event ){
+    this.parkData.getParks().then( data => {
+      this.parks = data;
+    })
+
+    let queryString = event.target.value;
+    if( queryString !== undefined ){
+      if( queryString.trim() == '' ){
+        return;
+      }
+      this.parkData.getFilteredParks(queryString).then(data => {
+        this.parks = data;
+      });
+    }
+  }
+
+
+  resetList( event ){
+    this.parkData.getParks().then( data => {
+      this.parks = data;
+    })
   }
 
   ngOnInit() {

@@ -45,4 +45,17 @@ export class ParkData {
         return park;
     }
 
+
+    getFilteredParks( queryString ){
+        return this.load().then( theParks => {
+            let filteredParks: any = [];
+            for( let thePark of theParks ){
+                if( thePark.name.toLowerCase().indexOf(queryString.toLowerCase()) > -1 ) {
+                    filteredParks.push(thePark);
+                }
+            }
+            return filteredParks;
+        })
+    }
+
 }
