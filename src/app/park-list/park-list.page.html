@@ -1,17 +1,24 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>ParkList</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-searchbar
-    [(ngModel)]="searchQuery"
-    (ionInput)="getParks($event)"
-    (ionClear)="resetList($event)"
-  ></ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let park of parks" (click)="goParkDetails(park)" class="parklist">
+<ion-content >
+  <ion-toolbar color="primary">
+    <ion-searchbar
+      [(ngModel)]="searchQuery"
+      (ionInput)="getParks($event)"
+      (ionClear)="resetList($event)"
+      
+    ></ion-searchbar>
+  </ion-toolbar>
+  
+  <ion-virtual-scroll padding [items]="parks" [headerFn]="customHeaderFn">
+    <ion-item-divider *virtualHeader="let header" color="primary">
+      {{ header }}
+    </ion-item-divider>
+    <ion-item (click)="goParkDetails(park)" class="parklist" *virtualItem="let park">
       <ion-thumbnail slot="start">
         <img src="assets/img/thumbs/{{ park.image }}" />
       </ion-thumbnail>
@@ -22,5 +29,5 @@
       </ion-label>
       
     </ion-item>
-  </ion-list>
+  </ion-virtual-scroll>
 </ion-content>
